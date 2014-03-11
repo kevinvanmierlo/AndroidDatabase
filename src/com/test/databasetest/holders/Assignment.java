@@ -5,6 +5,7 @@ public class Assignment
 	private long id;
 	private long courseId;
 	private String assignment;
+	private String course;
 	private String deadline;
 
 	public long getId() {
@@ -15,11 +16,11 @@ public class Assignment
 		this.id = id;
 	}
 	
-	public long getCourse(){
+	public long getCourseID(){
 		return courseId;
 	}
 	
-	public void setCourse(long courseId)
+	public void setCourseID(long courseId)
 	{
 		this.courseId = courseId;
 	}
@@ -30,6 +31,14 @@ public class Assignment
 
 	public void setAssignment(String assignment) {
 		this.assignment = assignment;
+	}
+	
+	public String getCourse() {
+		return course;
+	}
+
+	public void setCourse(String course) {
+		this.course = course;
 	}
 	
 	public String getDeadline()

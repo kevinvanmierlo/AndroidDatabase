@@ -12,19 +12,28 @@ import com.test.databasetest.holders.Course;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 public class SetAssignmentActivity extends Activity {
 	private EditText edit2;
-	private DatePicker datePicker1;
 	private Spinner spinner1;
+	private TextView textview1;
+	
+	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+	private SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, dd MMM yyyy", Locale.getDefault());
+	private Date date;
 	private DataSource datasource;
 	
 	@Override
@@ -37,13 +46,52 @@ public class SetAssignmentActivity extends Activity {
 		
 		linkUI();
 		fillUI();
+		
+		date = new Date();
+		textview1.setText(dateFormat.format(date));
+		
+		textview1.setOnClickListener(new OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				AlertDialog.Builder alert = new AlertDialog.Builder(SetAssignmentActivity.this);
+
+				alert.setTitle("Datum instellen");
+
+				final DatePicker datepickertest = new DatePicker(SetAssignmentActivity.this);
+				datepickertest.setSpinnersShown(false);
+				alert.setView(datepickertest);
+
+				alert.setPositiveButton("OK", new DialogInterface.OnClickListener()
+				{
+					public void onClick(DialogInterface dialog, int whichButton)
+					{
+						Calendar calendar = new GregorianCalendar(datepickertest.getYear(), datepickertest.getMonth(), datepickertest.getDayOfMonth());
+						date = calendar.getTime();
+						SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+						String dateString = dateFormat.format(date);
+						textview1.setText(dateString);
+					}
+				});
+
+				alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener()
+				{
+					public void onClick(DialogInterface dialog, int whichButton)
+					{
+					}
+				});
+
+				alert.show();
+			}
+		});
 	}
 	
 	private void linkUI()
 	{
 		spinner1 = (Spinner) findViewById(R.id.spinner1);
 		edit2 = (EditText) findViewById(R.id.editText2);
-		datePicker1 = (DatePicker) findViewById(R.id.datePicker1);
+		textview1 = (TextView) findViewById(R.id.textView1);
 	}
 	
 	private void fillUI()
@@ -68,16 +116,26 @@ public class SetAssignmentActivity extends Activity {
 		switch (item.getItemId())
 		{
 			case R.id.menu_accept:
-				Calendar calendar = new GregorianCalendar(datePicker1.getYear(), datePicker1.getMonth(), datePicker1.getDayOfMonth());
-				Date date = calendar.getTime();
-				SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM", Locale.getDefault());
-				String dateString = sdf.format(date);
-				
-				datasource.createAssignment(((Course)spinner1.getSelectedItem()).getId(), edit2.getText().toString(), dateString);
-				
-				Intent resultIntent = new Intent();
-				setResult(Activity.RESULT_OK, resultIntent);
-				finish();
+				if(edit2.getText().toString().equals(""))
+				{
+					AlertDialog.Builder builder = new AlertDialog.Builder(this);
+					builder.setTitle("No description");
+					builder.setMessage("Please add a description to add this assignment");
+					builder.setNegativeButton("Oke", new DialogInterface.OnClickListener()
+					{
+						public void onClick(DialogInterface dialog, int id)
+						{
+						}
+					});
+					builder.show();
+				}else
+				{
+					datasource.createAssignment(((Course)spinner1.getSelectedItem()).getId(), edit2.getText().toString(), sdf.format(date));
+					
+					Intent resultIntent = new Intent();
+					setResult(Activity.RESULT_OK, resultIntent);
+					finish();
+				}
 				return true;
 			case R.id.menu_cancel:
 				onBackPressed();

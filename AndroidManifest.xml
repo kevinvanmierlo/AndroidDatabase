@@ -26,6 +26,10 @@
             android:name="com.test.databasetest.SetAssignmentActivity"
             android:label="@string/title_activity_set_assignment" >
         </activity>
+        <activity
+            android:name="com.test.databasetest.DetailsAssignmentActivity"
+            android:label="@string/title_activity_details_assignment" >
+        </activity>
     </application>
 
 </manifest>

@@ -14,6 +14,14 @@
         android:id="@android:id/list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+    
+    <TextView
+        android:id="@android:id/empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        android:text="There are no assignments that belong to this course" />
+
     </FrameLayout>
     
     <ListView android:id="@+id/left_drawer"

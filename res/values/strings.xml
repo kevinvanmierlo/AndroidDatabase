@@ -2,26 +2,28 @@
 <resources>
 
     <string name="app_name">DatabaseTest</string>
-    <string name="title_activity_set_assignment">SetAssignmentActivity</string>
-    
+    <string name="title_activity_set_assignment">Add assignment</string>
+
     <!-- Navigation items -->
-    <string-array name="navigation_items" >
+    <string-array name="navigation_items">
         <item>Sorteer op datum</item>
         <item>Sorteer op vak</item>
     </string-array>
-    
+
     <!-- Drawer Layout -->
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
-    
+
     <!-- Context menu -->
     <string name="menu_delete">Delete</string>
-    
+    <string name="menu_edit">Edit</string>
+
     <!-- Options menu -->
     <string name="menu_add">Add</string>
-    
+
     <!-- Set Assignment -->
     <string name="setassignment_spinner_hint">Course</string>
     <string name="setassignment_assignment_hint">Assignment</string>
+    <string name="title_activity_details_assignment">Details screen</string>
 
 </resources>

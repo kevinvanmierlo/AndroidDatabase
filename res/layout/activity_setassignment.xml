@@ -22,11 +22,16 @@
         android:ems="10"
         android:hint="@string/setassignment_assignment_hint" />
 
-    <DatePicker
-        android:id="@+id/datePicker1"
-        android:layout_width="wrap_content"
+    <!-- android:background="?android:attr/selectableItemBackground" -->
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:spinnersShown="false" />
+        android:layout_marginTop="10dp"
+        android:background="@android:drawable/btn_default"
+        android:padding="10dp"
+        android:text="Large Text"
+        android:textAppearance="?android:attr/textAppearance" />
 
 </LinearLayout>

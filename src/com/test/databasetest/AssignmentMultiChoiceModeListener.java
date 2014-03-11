@@ -45,6 +45,11 @@ public class AssignmentMultiChoiceModeListener implements AbsListView.MultiChoic
 
 		updateSubtitle(activeMode);
 
+		if (activeMode != null)
+		{
+			activeMode.finish();
+		}
+
 		return (result);
 	}
 
